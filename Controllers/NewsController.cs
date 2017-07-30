@@ -30,17 +30,40 @@ namespace NewsTicker.Controllers
             return Ok(await _db.Events.Where(e => e.ExpiresOn > now && e.Group == groupId).ToArrayAsync());
         }
 
-        [HttpGet("test")]
+        [HttpPost("seed")]
         public async Task<IActionResult> Test()
         {
-            var test = new NewsEvent
+            var success = new NewsEvent
             {
-                Message = "test",
-                ExpiresOn = DateTime.Now.Add(TimeSpan.FromDays(1)),
+                Message = "Test Success Message",
+                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
                 Group = 1,
                 Severity = Severity.Success
             };
-            await _db.Events.AddAsync(test);
+            var info = new NewsEvent
+            {
+                Message = "Test Info Message",
+                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
+                Group = 1,
+                Severity = Severity.Info
+            };
+            var warning = new NewsEvent
+            {
+                Message = "Test Warning Message",
+                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
+                Group = 1,
+                Severity = Severity.Warning
+            };
+            var critical = new NewsEvent
+            {
+                Message = "Test Critical Message",
+                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
+                Group = 1,
+                Severity = Severity.Critical
+            };
+
+            _db.Events.RemoveRange(await _db.Events.ToArrayAsync());
+            await _db.Events.AddRangeAsync(success, info, warning, critical);
             await _db.SaveChangesAsync();
             return Ok();
         }

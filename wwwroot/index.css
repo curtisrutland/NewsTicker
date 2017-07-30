@@ -32,3 +32,19 @@ body {
 .pad {
     margin: auto;
 }
+
+.info {
+    color: rgb(63, 176, 252);
+}
+
+.success {
+    color: rgb(63, 252, 110);
+}
+
+.warning {
+    color: rgb(252, 141, 63);
+}
+
+.critical {
+    color: rgb(252, 63, 63);
+}
