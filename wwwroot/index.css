@@ -19,6 +19,7 @@ body {
 .item {
     padding: 2px 20px;
     font-size: 4rem;
+    white-space: nowrap;
 }
 
 .ticker-area::-webkit-scrollbar {
@@ -47,4 +48,8 @@ body {
 
 .critical {
     color: rgb(252, 63, 63);
+}
+
+.loading {
+    margin: 0 auto;
 }
