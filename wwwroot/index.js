@@ -42,29 +42,37 @@ class NewsTicker {
 
     setNews(news) {
         console.log(news);
+        if(!news || !news.length) {
+            news = [new NewsItem({
+                message: "No news is good news",
+                severity: 0,
+                group: this.group,
+                id: 0
+            })];
+        }
         this.$el.empty();
         news.map(item => new NewsItem(item)).forEach(item => this.$el.append(item.toElement()));
-        // news.forEach(item => {
-        //     this.$el.append(`<div class="item">${item.message}</div>`)
-        // });
         this.setPaddings();
         this.runAnimation();
     }
 
-    getScrollWidth() {
+    get scrollWidth() {
         return this.el.scrollWidth - this.el.clientWidth;
     }
 
     setPaddings() {
-        $(":first-child", this.$el).attr("style", `padding-left: ${window.innerWidth}px`);
-        $(":last-child", this.$el).attr("style", `padding-right: ${window.innerWidth}px`);
+        $(":first-child", this.$el).css("padding-left", `${window.innerWidth}px`);
+        $(":last-child", this.$el).css("padding-right", `${window.innerWidth}px`);
     }
 
     runAnimation() {
+        //scroll at 20 pixels per ms
+        let totalTime = 20 * this.scrollWidth;
+        console.log(totalTime);
         this.$el.scrollLeft(0);
         this.$el.animate({
-            scrollLeft: this.getScrollWidth()
-        }, this.animationLength, "linear", () => {
+            scrollLeft: this.scrollWidth
+        }, totalTime, "linear", () => {
             //this.runAnimation();
             this.fetchNews();
         });

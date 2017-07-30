@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NewsTicker.Entities;
+using NewsTicker.Models;
 
 namespace NewsTicker.Controllers
 {
@@ -28,6 +29,23 @@ namespace NewsTicker.Controllers
         {
             var now = DateTime.Now;
             return Ok(await _db.Events.Where(e => e.ExpiresOn > now && e.Group == groupId).ToArrayAsync());
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> Publish([FromBody] CreateNewsModel news)
+        {
+            var ev = news.ToNewsEvent();
+            await _db.Events.AddAsync(ev);
+            await _db.SaveChangesAsync();
+            return Ok(ev.Id);
+        }
+
+        [HttpDelete("reset")]
+        public async Task<IActionResult> Reset()
+        {
+            _db.RemoveRange(await _db.Events.ToArrayAsync());
+            await _db.SaveChangesAsync();
+            return Ok();
         }
 
         [HttpPost("seed")]
