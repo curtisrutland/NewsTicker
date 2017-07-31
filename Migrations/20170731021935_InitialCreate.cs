@@ -15,7 +15,6 @@ namespace NewsTicker.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
-                    ExpiresOn = table.Column<DateTime>(nullable: false),
                     Group = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: true),
                     Severity = table.Column<int>(nullable: false)

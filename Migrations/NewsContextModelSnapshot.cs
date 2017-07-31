@@ -22,8 +22,6 @@ namespace NewsTicker.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<DateTime>("ExpiresOn");
-
                     b.Property<int>("Group");
 
                     b.Property<string>("Message");

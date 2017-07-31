@@ -28,10 +28,14 @@ namespace NewsTicker.Controllers
         public async Task<IActionResult> GetNewsByGroup(int groupId)
         {
             var now = DateTime.Now;
-            return Ok(await _db.Events.Where(e => e.ExpiresOn > now && e.Group == groupId).ToArrayAsync());
+            var events = await _db.Events
+                .Where(e => e.Group == groupId)
+                .OrderByDescending(e => e.CreatedOn)
+                .ToArrayAsync();
+            return Ok(events);
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> Publish([FromBody] CreateNewsModel news)
         {
             var ev = news.ToNewsEvent();
@@ -54,28 +58,24 @@ namespace NewsTicker.Controllers
             var success = new NewsEvent
             {
                 Message = "Test Success Message",
-                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
                 Group = 1,
                 Severity = Severity.Success
             };
             var info = new NewsEvent
             {
                 Message = "Test Info Message",
-                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
                 Group = 1,
                 Severity = Severity.Info
             };
             var warning = new NewsEvent
             {
                 Message = "Test Warning Message",
-                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
                 Group = 1,
                 Severity = Severity.Warning
             };
             var critical = new NewsEvent
             {
                 Message = "Test Critical Message",
-                ExpiresOn = DateTime.Now.Add(TimeSpan.FromMinutes(20)),
                 Group = 1,
                 Severity = Severity.Critical
             };

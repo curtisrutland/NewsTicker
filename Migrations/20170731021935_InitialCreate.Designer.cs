@@ -8,7 +8,7 @@ using NewsTicker.Entities;
 namespace NewsTicker.Migrations
 {
     [DbContext(typeof(NewsContext))]
-    [Migration("20170730221443_InitialCreate")]
+    [Migration("20170731021935_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,8 +22,6 @@ namespace NewsTicker.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime>("ExpiresOn");
 
                     b.Property<int>("Group");
 

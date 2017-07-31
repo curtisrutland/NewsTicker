@@ -10,6 +10,5 @@ namespace NewsTicker.Entities
         public Severity Severity { get; set; }
         public int Group { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
-        public DateTime ExpiresOn { get; set; }
     }
 }
