@@ -17,7 +17,7 @@ body {
 }
 
 .item {
-    padding: 2px 20px;
+    padding: 2px 30px;
     font-size: 4rem;
     white-space: nowrap;
 }
@@ -27,7 +27,8 @@ body {
 }
  
 .ticker-area::-webkit-scrollbar-thumb {
-  background-color: #333333;
+  /* background-color: #333333; */
+  background-color: transparent;
 }
 
 .pad {

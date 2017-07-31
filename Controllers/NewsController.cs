@@ -24,13 +24,14 @@ namespace NewsTicker.Controllers
             return Ok(await _db.Events.ToArrayAsync());
         }
 
-        [HttpGet("group/{groupId}")]
-        public async Task<IActionResult> GetNewsByGroup(int groupId)
+        [HttpGet("group/{groupId}/{pageSize?}")]
+        public async Task<IActionResult> GetNewsByGroup(int groupId, int pageSize = 10)
         {
             var now = DateTime.Now;
             var events = await _db.Events
                 .Where(e => e.Group == groupId)
                 .OrderByDescending(e => e.CreatedOn)
+                .Take(pageSize)
                 .ToArrayAsync();
             return Ok(events);
         }
@@ -57,31 +58,56 @@ namespace NewsTicker.Controllers
         {
             var success = new NewsEvent
             {
-                Message = "Test Success Message",
+                Message = "Lorem ipsum dolor sit amet",
                 Group = 1,
                 Severity = Severity.Success
             };
             var info = new NewsEvent
             {
-                Message = "Test Info Message",
+                Message = "Suspendisse eu aliquet ligula",
                 Group = 1,
                 Severity = Severity.Info
             };
             var warning = new NewsEvent
             {
-                Message = "Test Warning Message",
+                Message = "Cras ut interdum ligula",
                 Group = 1,
                 Severity = Severity.Warning
             };
             var critical = new NewsEvent
             {
-                Message = "Test Critical Message",
+                Message = "Integer a nisl mattis",
                 Group = 1,
                 Severity = Severity.Critical
             };
 
+            var success2 = new NewsEvent
+            {
+                Message = "Phasellus rutrum mauris in libero",
+                Group = 2,
+                Severity = Severity.Success
+            };
+            var info2 = new NewsEvent
+            {
+                Message = "Vivamus pretium ligula a egestas faucibus",
+                Group = 2,
+                Severity = Severity.Info
+            };
+            var warning2 = new NewsEvent
+            {
+                Message = "Suspendisse potenti",
+                Group = 2,
+                Severity = Severity.Warning
+            };
+            var critical2 = new NewsEvent
+            {
+                Message = "Phasellus eget elit finibus",
+                Group = 2,
+                Severity = Severity.Critical
+            };
+
             _db.Events.RemoveRange(await _db.Events.ToArrayAsync());
-            await _db.Events.AddRangeAsync(success, info, warning, critical);
+            await _db.Events.AddRangeAsync(success, info, warning, critical, success2, info2, warning2, critical2);
             await _db.SaveChangesAsync();
             return Ok();
         }
