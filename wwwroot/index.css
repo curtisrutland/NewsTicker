@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 12px;
@@ -5,24 +9,48 @@ body {
     color: #DDDDDD;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 #below-tickers {
+    flex: 1 1 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .col {
-    flex: 1;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    border: 3px gray solid;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.col>.row {
+    flex: 0 1 auto;
+    padding: 5px 10px;
+    font-size: 2rem;
+    border-bottom: 2px gray solid;
+}
+
+.row.header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
 }
 
 .ticker-area {
+    flex: 0 1 auto;
     display: flex;
     width: 100%;
     flex-direction: row;
     overflow-y: auto;
     padding: 0;
     margin: 0;
+    -ms-overflow-style: none;
 }
 
 .ticker-item {
@@ -32,12 +60,7 @@ body {
 }
 
 .ticker-area::-webkit-scrollbar {
-    height: 2px;
-}
- 
-.ticker-area::-webkit-scrollbar-thumb {
-  /* background-color: #333333; */
-  background-color: transparent;
+    display: none;
 }
 
 .pad {

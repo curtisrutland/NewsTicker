@@ -21,8 +21,9 @@ class NewsItem {
 }
 
 class NewsTicker {
-    static get Slow() { return  20; }
-    static get Slower() { return 25; }
+    static get Slow() { return  18; }
+    static get Slower() { return 22; }
+    static get Slowest() { return 26; }
 
     constructor(selector, group, speed) {
         this.$el = $(selector);
@@ -105,4 +106,5 @@ class NewsTicker {
 $(() => {
     let t = new NewsTicker("#ticker-1", 1, NewsTicker.Slow);
     let t2 = new NewsTicker("#ticker-2", 2, NewsTicker.Slower);
+    let t3 = new NewsTicker("#ticker-3", 3, NewsTicker.Slowest);
 });

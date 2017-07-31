@@ -41,7 +41,13 @@ namespace NewsTicker
 
             app.UseMvc();
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = res =>
+                {
+                    res.Context.Response.Headers.Add("Cache-Control", new[] { "public", "no-cache" });
+                }
+            });
         }
     }
 }

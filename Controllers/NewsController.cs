@@ -107,7 +107,7 @@ namespace NewsTicker.Controllers
             };
 
             _db.Events.RemoveRange(await _db.Events.ToArrayAsync());
-            await _db.Events.AddRangeAsync(success, info, warning, critical, success2, info2, warning2, critical2);
+            await _db.Events.AddRangeAsync(info, success, warning, critical, warning2, success2, info2, critical2);
             await _db.SaveChangesAsync();
             return Ok();
         }
