@@ -7,6 +7,15 @@ body {
     padding: 0;
 }
 
+#below-tickers {
+    display: flex;
+    flex-direction: column;
+}
+
+.col {
+    flex: 1;
+}
+
 .ticker-area {
     display: flex;
     width: 100%;
@@ -16,7 +25,7 @@ body {
     margin: 0;
 }
 
-.item {
+.ticker-item {
     padding: 2px 30px;
     font-size: 4rem;
     white-space: nowrap;

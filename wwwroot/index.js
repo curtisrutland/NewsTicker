@@ -16,7 +16,7 @@ class NewsItem {
     }
 
     toElement() {
-        return $(`<div class="item ${this.color}" data-id="${this.id}">&#171; ${this.message} &#187;</div>`);
+        return $(`<div class="ticker-item ${this.color}" data-id="${this.id}">&#171; ${this.message} &#187;</div>`);
     }
 }
 
@@ -60,7 +60,7 @@ class NewsTicker {
 
     setLoading() {
         this.$el.empty();
-        this.$el.append($("<div class='loading item'>Loading...</div>"));
+        this.$el.append($("<div class='loading ticker-item'>Loading...</div>"));
     }
 
     setNews(news) {
