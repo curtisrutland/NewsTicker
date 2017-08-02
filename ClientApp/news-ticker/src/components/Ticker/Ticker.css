@@ -1,0 +1,17 @@
+.Ticker {
+    display: flex;
+    flex: 0;
+    flex-flow: row nowrap;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+}
+
+.Ticker::-webkit-scrollbar {
+     display: none; 
+}
+
+.Loading {
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+}

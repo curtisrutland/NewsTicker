@@ -1,0 +1,9 @@
+.App {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 12px;
+  background: #222222;
+  color: #DDDDDD;
+}

@@ -38,7 +38,11 @@ namespace NewsTicker
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            app.UseCors(b => {
+                b.AllowAnyHeader();
+                b.AllowAnyMethod();
+                b.AllowAnyOrigin();
+            });
             app.UseMvc();
             app.UseDefaultFiles();
             app.UseStaticFiles(new StaticFileOptions
